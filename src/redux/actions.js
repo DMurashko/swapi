@@ -66,6 +66,24 @@ export function fetchGetAllPeople() {
 	}
 }
 
+//fetching additional information
+
+export function fetchPlanet() {
+	return async (dispatch) => {
+		try {
+			await dispatch(setFetchStatus(true));
+			axios.get('https://swapi.dev/api/people/')
+				.then(response => {
+					console.log(response.data.results);
+					dispatch(addPeople(response.data.results));
+					dispatch(setFetchStatus(false));
+				});
+		} catch(e) {
+			console.log(e);
+		}
+	}
+}
+
 //pop-up actions
 
 export function setPopUpStatus(status) {

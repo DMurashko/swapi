@@ -4,3 +4,6 @@ export const ADD_PERSON = 'ADD_PERSON';
 export const POP_UP_STATUS = 'POP_UP_STATUS';
 export const SET_POP_UP_PERSON = 'SET_POP_UP_PERSON';
 export const DELETE_ALL_PEOPLE = 'DELETE_ALL_PEOPLE';
+export const GET_PLANET = 'GET_PLANET';
+export const GET_STARSHIP = 'GET_STARSHIP';
+export const GET_VEHICLE = 'GET_VEHICLE';

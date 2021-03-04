@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import Styles from "./CharacterData.module.scss";
 import HomeIcon from "../HomeIcon/HomeIcon";
-import { setCharacterData } from "../../redux/actions";
+import { setCharacterData, setFetchStatus } from "../../redux/actions";
+import { useEffect } from "react";
 
 function CharacterData(props) {
 
@@ -20,6 +21,11 @@ function CharacterData(props) {
 		'vehicles',
 		'starships'
 	];
+
+	useEffect(() => {
+		dispatch(setFetchStatus(true));
+		
+	}, [dispatch]);
 	
 	return (
 		<div className={Styles.main}>
