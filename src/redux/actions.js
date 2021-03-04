@@ -3,7 +3,8 @@ import {
 	ADD_PERSON,
 	POP_UP_STATUS,
 	SET_POP_UP_PERSON,
-	SET_CHARACTER_DATA
+	SET_CHARACTER_DATA,
+	DELETE_ALL_PEOPLE
 } from './types';
 import axios from "axios";
 
@@ -11,6 +12,12 @@ export function setFetchStatus(status) {
 	return {
 		type: FETCH_STATUS,
 		payload: status
+	}
+}
+
+export function deleteAllPeople() {
+	return {
+		type: DELETE_ALL_PEOPLE
 	}
 }
 

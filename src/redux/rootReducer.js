@@ -3,7 +3,8 @@ import {
 	ADD_PERSON,
 	POP_UP_STATUS,
 	SET_POP_UP_PERSON,
-	SET_CHARACTER_DATA
+	SET_CHARACTER_DATA,
+	DELETE_ALL_PEOPLE
 } from "./types";
 
 const initialState = {
@@ -22,6 +23,8 @@ const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_PERSON:
 			return { ...state, people: state.people.concat([action.payload]) };
+		case DELETE_ALL_PEOPLE:
+			return { ...state, people: [] };
 		case POP_UP_STATUS:
 			return { ...state, popUpStatus: action.payload };
 		case SET_POP_UP_PERSON:

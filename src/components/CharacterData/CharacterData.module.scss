@@ -2,6 +2,7 @@
 
 .main{
 	composes: list from '../Characters/Characters.module.scss';
+	height: 100vh;
 }
 
 .person{

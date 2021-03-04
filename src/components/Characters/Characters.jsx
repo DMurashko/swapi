@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGetAllPeople } from "../../redux/actions";
+import { deleteAllPeople, fetchGetAllPeople } from "../../redux/actions";
 import HomeIcon from "../HomeIcon/HomeIcon";
 import Person from "../Person/Person";
 import PopUp from "../PopUp/PopUp";
@@ -23,6 +23,9 @@ function Characters() {
 
 	useEffect(() => {
 		dispatch(fetchGetAllPeople());
+		return () => {
+			dispatch(deleteAllPeople());
+		}
 	}, [dispatch]);
 
 	useEffect(() => {
