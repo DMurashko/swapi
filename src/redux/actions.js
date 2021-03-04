@@ -4,7 +4,11 @@ import {
 	POP_UP_STATUS,
 	SET_POP_UP_PERSON,
 	SET_CHARACTER_DATA,
-	DELETE_ALL_PEOPLE
+	DELETE_ALL_PEOPLE,
+	SET_PLANET,
+	SET_STARSHIP,
+	SET_VEHICLE,
+	DELETE_FETCHED_DATA
 } from './types';
 import axios from "axios";
 
@@ -18,6 +22,12 @@ export function setFetchStatus(status) {
 export function deleteAllPeople() {
 	return {
 		type: DELETE_ALL_PEOPLE
+	}
+}
+
+export function deleteFetchedData() {
+	return {
+		type: DELETE_FETCHED_DATA
 	}
 }
 
@@ -56,7 +66,6 @@ export function fetchGetAllPeople() {
 			await dispatch(setFetchStatus(true));
 			axios.get('https://swapi.dev/api/people/')
 				.then(response => {
-					console.log(response.data.results);
 					dispatch(addPeople(response.data.results));
 					dispatch(setFetchStatus(false));
 				});
@@ -66,27 +75,109 @@ export function fetchGetAllPeople() {
 	}
 }
 
-//fetching additional information
+//fetching planet
 
-export function fetchPlanet() {
+export function setPlanet(planet) {
+	return {
+		type: SET_PLANET,
+		payload: planet
+	}
+}
+
+export function fetchPlanet(url) {
+	return async (dispatch) => {
+		try {
+			axios.get(url)
+				.then(response => {
+					dispatch(setPlanet(response.data.name));
+				});
+		} catch(e) {
+			console.log(e);
+		}
+	}
+}
+
+//fetching starship
+
+export function setStarship(starship) {
+	return {
+		type: SET_STARSHIP,
+		payload: starship
+	}
+}
+
+export function fetchStarship(url) {
+	return async (dispatch) => {
+		try {
+			axios.get(url)
+				.then(response => {
+					dispatch(setStarship(response.data.name));
+				});
+		} catch(e) {
+			console.log(e);
+		}
+	}
+}
+
+//fetching vehicle
+
+export function setVehicle(vehicle) {
+	return {
+		type: SET_VEHICLE,
+		payload: vehicle
+	}
+}
+
+export function fetchVehicle(url) {
+	return async (dispatch) => {
+		try {
+			axios.get(url)
+				.then(response => {
+					dispatch(setVehicle(response.data.name));
+				});
+		} catch(e) {
+			console.log(e);
+		}
+	}
+}
+
+//main action for fetching planets, starships and vehicles
+
+export function fetchAdditionalUserData(person) {
 	return async (dispatch) => {
 		try {
 			await dispatch(setFetchStatus(true));
-			axios.get('https://swapi.dev/api/people/')
-				.then(response => {
-					console.log(response.data.results);
-					dispatch(addPeople(response.data.results));
-					dispatch(setFetchStatus(false));
-				});
+
+			if (person.homeworld instanceof Array && person.homeworld.length) {
+				for (let item of person.homeworld) {
+					await dispatch(fetchPlanet(item));
+				}
+			} else if (person.homeworld && person.homeworld.slice(0,5).includes('http')) {
+				await dispatch(fetchPlanet(person.homeworld));
+			}
+			
+			if (person.starships instanceof Array && person.starships.length) {
+				for (let item of person.starships) {
+					await dispatch(fetchStarship(item));
+				}
+			} else if (person.starships && person.starships.slice(0,5).includes('http')) {
+				await dispatch(fetchStarship(person.starships));
+			}
+
+			if (person.vehicles instanceof Array && person.vehicles.length) {
+				for (let item of person.vehicles) {
+					await dispatch(fetchVehicle(item));
+				}
+			} else if (person.vehicles && person.vehicles.slice(0,5).includes('http')) {
+				await dispatch(fetchVehicle(person.vehicles));
+			}
+
+			await dispatch(setFetchStatus(false));
 		} catch(e) {
 			console.log(e);
 		}
 	}
 }
-
-//starship
-
-//vehicle
 
 //pop-up actions
 

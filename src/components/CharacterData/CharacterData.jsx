@@ -1,31 +1,44 @@
 import { useDispatch, useSelector } from "react-redux";
 import Styles from "./CharacterData.module.scss";
 import HomeIcon from "../HomeIcon/HomeIcon";
-import { setCharacterData, setFetchStatus } from "../../redux/actions";
+import { deleteFetchedData, fetchAdditionalUserData, setCharacterData } from "../../redux/actions";
 import { useEffect } from "react";
 
 function CharacterData(props) {
 
 	const dispatch = useDispatch();
 	const characterData = useSelector(state => state.characterData);
+	const fetchStatus = useSelector(state => state.fetchStatus);
+	const fetchedPlanet = useSelector(state => state.fetchedPlanet);
+	const fetchedStarships = useSelector(state => state.fetchedStarships);
+	const fetchedVehicles = useSelector(state => state.fetchedVehicles);
 
 	function onClickHandler() {
 		dispatch(setCharacterData(false));
+	}
+
+	function toTitleCase(str) {
+		return str.replace(
+			/\w\S*/g,
+			function(txt) {
+				return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+			}
+		);
 	}
 
 	const requiredKeys = [
 		'name',
 		'gender',
 		'birth_year',
-		'homeworld',
-		'vehicles',
-		'starships'
 	];
 
 	useEffect(() => {
-		dispatch(setFetchStatus(true));
-		
-	}, [dispatch]);
+		dispatch(fetchAdditionalUserData(characterData));
+		return () => {
+			dispatch(setCharacterData(false));
+			dispatch(deleteFetchedData());
+		}
+	}, [dispatch, characterData]);
 	
 	return (
 		<div className={Styles.main}>
@@ -39,8 +52,35 @@ function CharacterData(props) {
 						return characterData[key];
 					})
 					.map((key, index) => {
-						return <div className={Styles.person} key={index}>{characterData[key]}</div>
+						return <div className={Styles.person} key={index}>{toTitleCase(key)} : {characterData[key]}</div>
 					})
+			}
+
+			{
+				!fetchStatus &&
+				fetchedPlanet ?
+					fetchedPlanet.map((key, index) => {
+						return <div className={Styles.person} key={index}>Planet: {key}</div>
+					})
+				:null
+			}
+
+			{
+				!fetchStatus &&
+				fetchedStarships ?
+					fetchedStarships.map((key, index) => {
+						return <div className={Styles.person} key={index}>Starship: {key}</div>
+					})
+				:null
+			}
+
+			{
+				!fetchStatus &&
+				fetchedVehicles ?
+					fetchedVehicles.map((key, index) => {
+						return <div className={Styles.person} key={index}>Vehicle: {key}</div>
+					})
+				:null
 			}
 		</div>
 	);
