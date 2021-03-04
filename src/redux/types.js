@@ -1,0 +1,5 @@
+export const SET_CHARACTER_DATA = 'SET_CHARACTER_DATA';
+export const FETCH_STATUS = 'FETCH_STATUS';
+export const ADD_PERSON = 'ADD_PERSON';
+export const POP_UP_STATUS = 'POP_UP_STATUS';
+export const SET_POP_UP_PERSON = 'SET_POP_UP_PERSON';

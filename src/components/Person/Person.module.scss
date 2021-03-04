@@ -1,0 +1,17 @@
+@import '../../css/variables.scss';
+
+.person{
+	margin: 20px 0;
+	background-color: $surface-first-level;
+	color: $on-surface-color;
+	height: 50px;
+	border-radius: 5px;
+	display: grid;
+	place-items: center center;
+}
+
+@media only screen and (min-width: 600px) {
+	.person {
+		width: 600px;
+	}
+}

@@ -1,0 +1,28 @@
+@import '../../css/variables.scss';
+
+.container{
+	width: 580px;
+	border-radius: 5px;
+	display: grid;
+	place-items: center center;
+	grid-template-columns: 1fr;
+	background-color: $surface-first-level;
+	color: $on-surface-color;
+	position: fixed;
+    top: 50%;
+	margin: 0 auto;
+    transform: translate(0, -50%);
+	z-index: 2;
+	padding: 0 20px;
+
+	.item{
+		width: 100%;
+		margin: 10px 0;
+		height: 50px;
+		border-radius: 5px;
+		background-color: $surface-second-level;
+		color: $on-surface-second-level;
+		display: grid;
+		place-items: center center;
+	}
+}

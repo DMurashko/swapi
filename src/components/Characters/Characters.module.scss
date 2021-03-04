@@ -1,0 +1,17 @@
+@import '../../css/variables.scss';
+
+.list{
+	background-color: $background-color;
+	color: $on-background-color;
+	min-height: 100%;
+	overflow-y: auto;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 1;
+
+	.icon{
+		margin: 10px;
+	}
+}

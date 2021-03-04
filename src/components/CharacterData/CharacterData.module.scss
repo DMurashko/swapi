@@ -1,0 +1,15 @@
+@import '../../css/variables.scss';
+
+.main{
+	composes: list from '../Characters/Characters.module.scss';
+}
+
+.person{
+	composes: person from '../Person/Person.module.scss';
+}
+
+@media only screen and (min-width: 600px) {
+	.person {
+		width: 600px;
+	}
+}
