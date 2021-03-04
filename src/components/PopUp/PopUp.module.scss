@@ -1,8 +1,9 @@
 @import '../../css/variables.scss';
 
 .container{
-	width: 80vw;
+	width: 70vw;
 	border-radius: 5px;
+	border: 2px solid $primary-color;
 	display: grid;
 	place-items: center center;
 	grid-template-columns: 1fr;
@@ -17,7 +18,7 @@
 
 	@media only screen and (min-width: 600px) {
 		.container{
-			width: 580px;	
+			width: 500px;	
 		}
 	}
 
@@ -30,5 +31,6 @@
 		color: $on-surface-second-level;
 		display: grid;
 		place-items: center center;
+		cursor: pointer;
 	}
 }

@@ -37,9 +37,9 @@ function PopUp() {
 
 	return (
 		<div className={Styles.container} ref={ref}>
-			<div className={Styles.item}>{poppedUpPerson.name}</div>
-			<div className={Styles.item}>{poppedUpPerson.gender}</div>
-			<div className={Styles.item}>{poppedUpPerson.birth_year}</div>
+			<div className={Styles.item}>Name: {poppedUpPerson.name}</div>
+			<div className={Styles.item}>Gender: {poppedUpPerson.gender}</div>
+			<div className={Styles.item}>Birth year: {poppedUpPerson.birth_year}</div>
 			<Link 
 				to={{
 					pathname: '/character_data',

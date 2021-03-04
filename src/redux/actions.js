@@ -84,6 +84,10 @@ export function fetchPlanet() {
 	}
 }
 
+//starship
+
+//vehicle
+
 //pop-up actions
 
 export function setPopUpStatus(status) {
